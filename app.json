@@ -3,6 +3,7 @@
     "name": "biohacker-mobile",
     "slug": "biohacker-mobile",
     "version": "1.0.0",
+    "sdkVersion": "56.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "biohackermobile",
@@ -18,7 +19,9 @@
         "foregroundImage": "./assets/images/icon.png"
       },
       "edgeToEdgeEnabled": true,
-      "versionCode": 1
+      "versionCode": 1,
+      "targetSdkVersion": 35,
+      "minSdkVersion": 24
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

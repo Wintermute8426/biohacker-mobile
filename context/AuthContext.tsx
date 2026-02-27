@@ -24,6 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null)
       } catch (error) {
         console.error('Auth check error:', error)
+        setUser(null)
       } finally {
         setLoading(false)
       }
@@ -32,17 +33,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        await AsyncStorage.setItem('user', JSON.stringify(session.user))
-      } else {
-        await AsyncStorage.removeItem('user')
-      }
-    })
+    try {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        setUser(session?.user ?? null)
+        if (session?.user) {
+          await AsyncStorage.setItem('user', JSON.stringify(session.user))
+        } else {
+          await AsyncStorage.removeItem('user')
+        }
+      })
 
-    return () => {
-      subscription?.unsubscribe()
+      return () => {
+        subscription?.unsubscribe()
+      }
+    } catch (error) {
+      console.error('Auth listener error:', error)
     }
   }, [])
 

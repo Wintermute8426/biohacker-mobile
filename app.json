@@ -33,6 +33,12 @@
           "backgroundColor": "#000000"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2b992ec0-10ad-4ff6-ab51-64479c4e44de"
+      }
+    },
+    "owner": "wintermute-rooz"
   }
 }
